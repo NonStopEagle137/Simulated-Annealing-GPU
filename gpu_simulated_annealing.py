@@ -65,10 +65,11 @@ class gpu_simulated_annealing:
             
             self.cost_function_old()
                 
-            self.x_new = self.x_new.assign(tf.random.uniform(minval = -1.0*self.learning_rate,
+            self.x_new = self.x_new.assign(tf.add(self.x_guess.read_value(),
+                                                  tf.random.uniform(minval = -1.0*self.learning_rate,
                                                       maxval = 1.0*self.learning_rate,
                                                       shape = self.x_new.shape,
-                                                      dtype = tf.float64))
+                                                      dtype = tf.float64)))
             self.cost_function_new()
             self.prob__() 
             if self.ret_val[0] == 0:
